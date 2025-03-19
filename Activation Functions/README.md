@@ -17,7 +17,8 @@ Now if you look into the above plot,you can see that there is no way you can sep
 That is exactly where activation functions comes into play.
 There are two main properties for an activation function:
 
-1.Non-linearity (discussed this above)
+1.Non-linearity (discussed above)
+
 2.Differentiable
 
 For a neural network to learn, its activation functions must be differentiable. 
@@ -32,8 +33,6 @@ then compares it to the actual result. The difference (called the error) is used
 adjust the weights. To figure out how to adjust them, we calculate the gradient 
 (the derivative) of the activation function, which tells us how sensitive the output 
 is to changes in the input.
-
-Simple Example:
 
 Let’s say we have a very simple network with just one neuron and use the sigmoid 
 activation function:
