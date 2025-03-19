@@ -25,11 +25,11 @@ For a neural network to learn, its activation functions must be differentiable.
 This means that the function must have a derivative, which allows us to calculate 
 how much the function's output changes in response to small changes in the input. 
 This is important because the neural network learns through a process called 
-backpropagation, where the network adjusts its internal settings (like the weights 
-of neurons) to improve predictions.
+backpropagation, where the network adjusts its internal settings like the weights 
+to improve predictions.
 
 Here's how it works in simple terms: During training, the network makes a prediction, 
-then compares it to the actual result. The difference (called the error) is used to 
+then compares it to the actual result. The difference (or error) is used to 
 adjust the weights. To figure out how to adjust them, we calculate the gradient 
 (the derivative) of the activation function, which tells us how sensitive the output 
 is to changes in the input.
@@ -60,7 +60,7 @@ In short, the differentiability of the activation function allows the neural net
 to adjust its weights and improve its predictions step by step.
 
 #
-Activation functions have many advantages, but they can also present challenges during training. Some activation functions, like Sigmoid or Tanh, have areas where their gradients become very small, often approaching zero. These areas are called saturation regions. In these regions, small changes in the input values cause very tiny changes in the output of the activation function. As a result, the training process slows down significantly. This is known as the vanishing gradient problem.
+Activation functions have many advantages, but they can also have challenges during training. Some activation functions, like Sigmoid or Tanh, have areas where their gradients become very small, often approaching zero. These areas are called saturation regions. In these regions, small changes in the input values cause very tiny changes in the output of the activation function. As a result, the training process slows down significantly. This is known as the vanishing gradient problem.
 
 For example, consider the Sigmoid activation function:
 
@@ -71,7 +71,7 @@ When the input value is very large or very small (in the range where the sigmoid
     For x = 10, σ(10) ≈ 0.99995 (close to 1)
     The derivative σ'(x) ≈ 0.00005 (a very small value)
 
-Now, if we want to adjust the weights based on this small gradient, the update becomes minuscule. This means the network learns very slowly in these regions, leading to slower convergence during training.
+Now, if we want to adjust the weights based on this small gradient, the update becomes extremely small. This means the network learns very slowly in these regions, leading to slower convergence during training.
 
 ![Example Image 3](Images/Figure_3.png)
 
