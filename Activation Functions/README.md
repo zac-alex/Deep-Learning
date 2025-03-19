@@ -37,18 +37,13 @@ Simple Example:
 
 Let’s say we have a very simple network with just one neuron and use the sigmoid 
 activation function:
-'''
-                         1 
-      σ(x) =    -------------------
-                  (1 + e^(-x))
-'''
+
+   σ(x) = 1 / (1 + e^(-x))
+
 For example, if the input x = 2, then:
-'''
-                         1 
-      σ(x) =    ------------------- ≈ 0.88
-                  (1 + e^(-2))
-                  
-'''
+
+    σ(2) = 1 / (1 + e^(-2)) ≈ 0.88
+    
 Now, we need to know how to adjust the weights based on the error. For that, we 
 need the derivative of the sigmoid function:
 
