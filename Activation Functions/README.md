@@ -77,3 +77,6 @@ Now, if we want to adjust the weights based on this small gradient, the update b
 
 This issue is known as the Vanishing Gradient Problem. It occurs when the gradients (derivatives) of activation functions become very small, particularly in regions where the activation function is saturated (e.g., near the maximum or minimum values of the Sigmoid or Tanh functions). This leads to very small weight updates during backpropagation, slowing down or even halting the learning process in deep neural networks.
 In simpler terms, when the values of the input push the activation function to its extremes (near the max or min), the function doesn't change much anymore. This slow response can hinder the learning process, making it harder for the network to adjust and improve.
+
+![Example Image 4](Images/Figure_4.png)
+
