@@ -284,7 +284,7 @@ Additionally, it is more powerful than Leaky ReLU because the slope for negative
 Apart from these advantages,PReLU has issues like higher risk of overfitting (as it introduces additional trainable parameters into the model).  
 It is also slightly more complex to train compared to ReLU or Leaky ReLU, due to the need to learn the slope for the negative part of the function.
 
-## How PReLU (Parametric ReLU) Learns the Parameter `p`
+### How PReLU (Parametric ReLU) Learns the Parameter `p`
 
 In **PReLU (Parametric ReLU)**, the main difference is that the slope for negative inputs, represented by `p`, is a **learnable parameter**. This allows the model to adjust this slope during training to improve its performance based on the data it's seeing, unlike other functions like **ReLU** or **Leaky ReLU** where the slope is fixed.
 
