@@ -308,4 +308,69 @@ Where:
 
 Over several training iterations (or epochs), `p` gradually learns to adapt to the data, making the model more flexible. Unlike **Leaky ReLU**, where `p` is fixed, **PReLU** allows the model to dynamically adjust this parameter to improve performance.
 
+### ELU (Exponential Linear Unit)
+
+The **Exponential Linear Unit (ELU)** activation function is a strong alternative to ReLU due to its ability to address some of the issues that ReLU faces, such as the "dying neuron" problem. 
+
+ELU function can be defined as:
+
+- **For x ≥ 0**, ELU(x) = x
+- **For x < 0**, ELU(x) = α * (exp(x) - 1)
+
+Where:
+- x is the input value
+- α is a constant (usually values like 1)
+
+Unlike ReLU, which abruptly outputs 0 for negative inputs, ELU smoothly transitions to negative values, which helps the network perform better, especially for complex tasks.Since the ELU function allows negative values (with a curve shaped by `α`), it avoids the problem of "dying" neurons which ReLU suffers from, where neurons stop learning because their output is always zero for negative inputs.
+
+![Example Image 8](Images/Figure_8.png)
+
+Let’s take an example to understand how ELU works.
+
+Assume:
+- Input `x = -1.5`
+- `α = 1`
+
+For the input `x = -1.5`, since `x < 0`,
+
+ELU(x) = α * (exp(x) - 1) ELU(-1.5) = 1 * (exp(-1.5) - 1)
+
+Now, calculating `exp(-1.5)`:
+
+exp(-1.5) ≈ 0.2231 ELU(-1.5) = 0.2231 - 1 = -0.7769
+
+So, the output for `x = -1.5` is approximately `-0.7769`.
+
+Since the ELU function involves an exponential calculation, it increases computational time compared to ReLU.Also, the parameter α is fixed, so there is no learning or adaptation of it during training.
+
+ELU can cause problems with exploding gradients if the values of α and the inputs grow large.
+
+### Swish Activation Function
+
+**Swish** is a relatively newer activation function introduced by researchers at Google.
+
+The function is as follows:
+
+**Swish(x) = x / (1 + exp(-x))**
+
+This function is a smooth, non-monotonic function that combines elements of the sigmoid function with a linear identity function. Swish has been found to outperform ReLU and other common activation functions in many deep learning models.
+
+Unlike ReLU, which has a sharp transition at zero, Swish is smooth across its entire range, which can help the network learn more effectively
+and also Swish is non-monotonic, meaning it can have both positive and negative slopes at different points, which gives the network more flexibility in learning complex patterns.
+Swish has shown improved performance in various deep learning tasks, such as image classification and natural language processing, compared to ReLU and other traditional activation functions.
+
+![Example Image 9](Images/Figure_9.png)
+
+Let’s go through an example
+
+- Input `x = -2`
+- We will use the formula for Swish: `Swish(x) = x / (1 + exp(-x))`
+
+Now, calculate Swish for `x = -2`:
+
+Swish(-2) = -2 / (1 + exp(-(-2))) Swish(-2) = -2 / (1 + exp(2)) Swish(-2) = -2 / (1 + 7.389) Swish(-2) = -2 / 8.389 Swish(-2) ≈ -0.238
+
+So, when input `x = -2`  output is approximately `-0.238`.
+
+Since Swish involves a sigmoid function, it is computationally more expensive than ReLU, which is a simple thresholding function.
 
