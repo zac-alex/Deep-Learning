@@ -181,7 +181,7 @@ The final output (after applying sigmoid) is approximately 0.279. This means tha
 
 We typically wouldn't use tanh in the output layer for most real-world problems where the output needs to be either an unrestricted continuous value or a probability. This is because tanh is bounded between -1 and 1, which limits its applicability, especially in cases like regression tasks or classification tasks that require output values beyond that range, such as probabilities between 0 and 1.
 
-### ReLU (Rectified Linear Unit)
+# ReLU (Rectified Linear Unit)
 
 ReLU is probably the most commonly used activation function in neural networks. It's popular for a good reason—it’s simple, computationally efficient, and works well in most cases. 
 
