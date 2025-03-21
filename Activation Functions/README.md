@@ -156,15 +156,15 @@ Let’s say we have a simple neural network with:
 
 First, we calculate the input to the hidden neuron by multiplying the input by the weight and adding the bias:
 
-\[
+$$
 z_1 = (w_1 \times x) + b_1 = (2 \times 0.5) + 0.1 = 1.0 + 0.1 = 1.1
-\]
+$$
 
 Now, we apply the **tanh** function to this value:
 
-\[
+$$
 \text{hidden\_output} = \tanh(1.1) \approx 0.7616
-\]
+$$
 
 So, the output of the hidden layer is **0.7616**.
 
@@ -174,15 +174,15 @@ So, the output of the hidden layer is **0.7616**.
 
 Next, we take the output of the hidden layer (which is **0.7616**) and pass it through the output layer. First, we calculate the input to the output neuron:
 
-\[
+$$
 z_2 = (w_2 \times \text{hidden\_output}) + b_2 = (-1.5 \times 0.7616) + 0.2 = -1.1424 + 0.2 = -0.9424
-\]
+$$
 
 Finally, we apply the **sigmoid** function to this value:
 
-\[
+$$
 \text{output} = \frac{1}{1 + e^{-z_2}} = \frac{1}{1 + e^{0.9424}} \approx \frac{1}{1 + 2.567} \approx 0.279
-\]
+$$
 
 The **final output** (after applying **sigmoid**) is approximately **0.279**. This means that the model predicts a **27.9% chance** that the input belongs to class 1 (or class 0).
 
