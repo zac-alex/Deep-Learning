@@ -235,3 +235,77 @@ Leaky ReLU avoids the problem of dead neurons by allowing small negative values 
 Since negative values still have a small gradient, the network can converge faster, avoiding the issues that ReLU might face in certain situations.
 
 ![Example Image 4](Images/Figure_6.png)
+
+
+One of the main limitations of **Leaky ReLU** is that the small slope it uses for negative values — like `0.01` or `0.02` — is manually chosen. This slope is fixed and does not change or adapt during training. The issue with this approach is that the same constant slope might not be suitable for every dataset or task. But since Leaky ReLU does not have the ability to adjust this slope automatically, it can limit the model’s flexibility and learning capability in certain situations.
+
+### Parametric ReLU (PReLU)
+
+#### What is PReLU?
+
+Parametric ReLU (PReLU) is an improvement over Leaky ReLU, introduced to solve the issue of choosing a fixed slope (α) for the negative part of the function in Leaky ReLU.
+
+Instead of using a predefined constant value (like 0.01), PReLU makes the slope a learnable parameter, allowing the network to find the best value during training for better performance.
+
+#### PReLU Activation Function Formula:
+
+PReLU(x) = x         if x ≥ 0  
+          p * x      if x < 0
+
+Here, `p` is a trainable parameter, not a constant like in Leaky ReLU.  
+This means the model learns the most suitable slope `p` for the negative region during training.  
+The output range of PReLU is (-∞, ∞).
+
+In Leaky ReLU, the slope (e.g., 0.01) is constant and may not be optimal for every dataset or task.  
+PReLU adapts by learning the best slope `p` based on training data.  
+This makes it more flexible and expressive than ReLU or Leaky ReLU.
+
+However, since the model learns one more parameter (the slope), it can lead to overfitting if not regularized properly.
+
+Let’s take an example to understand how PReLU works:
+
+- Input `x = -3`  
+- Trainable parameter `p = 0.2`
+
+Now, apply the PReLU formula:
+
+Since `x < 0`,  
+PReLU(x) = p * x = 0.2 * (-3) = -0.6
+
+So, the output of PReLU for input `-3` is `-0.6`.
+
+If the input was `x = 4`, then:  
+PReLU(x) = 4 (since x is positive, it behaves just like ReLU)
+
+![Example Image 4](Images/Figure_7.png)
+
+One of the key advantages of PReLU is that it learns from data and adapts better to the specific problem during training.It also helps prevent dead neurons, a common issue with the standard ReLU function.  
+Additionally, it is more powerful than Leaky ReLU because the slope for negative inputs is a trainable parameter rather than a fixed constant.
+Apart from these advantages,PReLU has issues like higher risk of overfitting (as it introduces additional trainable parameters into the model).  
+It is also slightly more complex to train compared to ReLU or Leaky ReLU, due to the need to learn the slope for the negative part of the function.
+
+## How PReLU (Parametric ReLU) Learns the Parameter `p`
+
+In **PReLU (Parametric ReLU)**, the main difference is that the slope for negative inputs, represented by `p`, is a **learnable parameter**. This allows the model to adjust this slope during training to improve its performance based on the data it's seeing, unlike other functions like **ReLU** or **Leaky ReLU** where the slope is fixed.
+
+Initially, the slope parameter `p` starts with a small positive value, typically around **0.25**. This initial value doesn’t have to be perfect; the key is that it will get fine-tuned during training.
+
+When forward propagation occurs, the **PReLU** activation function works like this: If the input is positive, the output is simply the same as the input, just like ReLU. But if the input is negative, the output becomes `p * x`, where `x` is the input and `p` is the current value of the slope parameter.
+
+After the forward pass, the model calculates the **loss**, which represents how far off the predictions are from the actual target values. This loss is calculated using a function like **Mean Squared Error (MSE)** or **Cross-Entropy Loss**.
+
+Then, the magic happens during **backpropagation**. This process helps adjust the weights, biases, and the slope parameter `p` to minimize the loss. Specifically, the derivative of the loss is calculated with respect to `p`, the slope.
+
+For the PReLU function, the derivative works like this: if the input is positive, the derivative is 1 (same as ReLU). But if the input is negative, the derivative is equal to the input value `x`, because the function behaves like `p * x`.
+
+Once the gradients are calculated, the model updates the parameter `p` using an optimization technique like **gradient descent**. Essentially, `p` is adjusted by subtracting the gradient of the loss with respect to `p`, scaled by a **learning rate**. This update rule looks like:
+
+p = p - learning_rate * (dL/dp)
+
+Where:
+- `dL/dp` is the gradient of the loss with respect to `p`
+- `learning_rate` controls the size of the adjustment
+
+Over several training iterations (or epochs), `p` gradually learns to adapt to the data, making the model more flexible. Unlike **Leaky ReLU**, where `p` is fixed, **PReLU** allows the model to dynamically adjust this parameter to improve performance.
+
+
