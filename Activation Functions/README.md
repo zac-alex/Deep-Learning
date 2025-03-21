@@ -125,33 +125,7 @@ Consider what happens when the inputs to the neurons are large positive or large
 
 Both sigmoid and tanh can suffer from the vanishing gradient problem in deep networks, where gradients become very small and stop the weights from updating effectively. However, tanh is generally preferred because it has a wider range of gradient values (compared to sigmoid), making it more effective in practice for learning over longer time periods and deeper networks.
 
-#### Tanh Function
-
-To address the vanishing gradient problem and other issues with the Logistic Sigmoid, the **Tanh** (hyperbolic tangent) function is often used. The Tanh function has a similar shape to the sigmoid but has a key difference: its output is zero-centered. This means that the output values range from -1 to 1, instead of 0 to 1.
-
-The Tanh function is given by:
-
-Tanh(x) = (e^x - e^(-x)) / (e^x + e^(-x))
-
-It is also non-linear and squashes the input, but it has the advantage of being zero-centered. This makes the training process more stable and can help with convergence.
-
-#### Zero-Centered Nature of Tanh:
-
-The **Tanh function** is **zero-centered**, which is an important property. This means that the output values of the Tanh function range from **-1 to 1** instead of **0 to 1** like the Logistic Sigmoid. Being zero-centered has significant benefits:
-
-1. **Helps with convergence**: When the data is zero-centered, it helps the optimization process. Neural networks rely on gradient-based optimization techniques (like stochastic gradient descent) to update the weights during training. If the output of neurons is mostly positive (like in the case of the sigmoid function), the updates to weights can lead to slow learning because the gradients will be skewed in one direction. With Tanh, the zero-centered nature ensures that the gradients can flow more evenly, making learning more stable and faster.
-   
-2. **Reduces bias**: The zero-centered nature of Tanh also means that the activations can be negative, which provides more flexibility to the model. It helps the network explore a broader set of possibilities instead of being restricted to positive outputs.
-
-##### Example:
-Let's say `x = 2`:
-
-Tanh(2) = (e^2 - e^(-2)) / (e^2 + e^(-2)) ≈ 0.96  (This values is in between -1 and 1)
-
-#### Why Zero-Centered Is Helpful:
-Consider what happens when the inputs to the neurons are large positive or large negative values. For the **Logistic Sigmoid** function, if the input is large positive, the output will approach 1, and if the input is large negative, the output will approach 0. This creates an issue because during backpropagation, the gradient of the sigmoid function near its saturation points (near 0 or 1) becomes very small. This means the network's learning will slow down because the weights won't get updated effectively.
-
-![Example Image 4](Images/Figure_4.png)
+![Example Image 4](Images/Figure_5.png)
 
 Both sigmoid and tanh can suffer from the vanishing gradient problem in deep networks, where gradients become very small and stop the weights from updating effectively. However, tanh is generally preferred because it has a wider range of gradient values (compared to sigmoid), making it more effective in practice for learning over longer time periods and deeper networks.
 
@@ -160,8 +134,6 @@ Both sigmoid and tanh can suffer from the vanishing gradient problem in deep net
 Sigmoid is specifically designed for probability-like outputs because it maps any input to a value between 0 and 1. This is why it's typically used in binary classification tasks where the output represents a probability of class membership.
 
 Tanh actually maps input to values between -1 and 1. This makes it more suited for tasks where the output needs to be centered around zero, such as in regression problems or hidden layers of neural networks. Tanh's range allows for both positive and negative activations, which can be beneficial in modeling complex relationships in data.
-
-### Understanding the Use of **tanh** in Hidden Layer and **sigmoid** in Output Layer
 
 Lets assume a network with 1 input layer,1 hidden layer with Tanh activation function and 1 output layer with sigmoid activation function.
 
