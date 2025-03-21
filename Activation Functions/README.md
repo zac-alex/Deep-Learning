@@ -121,8 +121,6 @@ Tanh(2) = (e^2 - e^(-2)) / (e^2 + e^(-2)) ≈ 0.96  (This values is in between -
 #### Why Zero-Centered Is Helpful:
 Consider what happens when the inputs to the neurons are large positive or large negative values. For the **Logistic Sigmoid** function, if the input is large positive, the output will approach 1, and if the input is large negative, the output will approach 0. This creates an issue because during backpropagation, the gradient of the sigmoid function near its saturation points (near 0 or 1) becomes very small. This means the network's learning will slow down because the weights won't get updated effectively.
 
-![Example Image 4](Images/Figure_4.png)
-
 Both sigmoid and tanh can suffer from the vanishing gradient problem in deep networks, where gradients become very small and stop the weights from updating effectively. However, tanh is generally preferred because it has a wider range of gradient values (compared to sigmoid), making it more effective in practice for learning over longer time periods and deeper networks.
 
 ![Example Image 4](Images/Figure_5.png)
@@ -154,32 +152,42 @@ Let’s say we have a simple neural network with:
 - **Weight between hidden layer and output layer** = -1.5
 - **Bias for output layer** = 0.2
 
-**Hidden Layer Calculation (Using tanh)**:
+### Hidden Layer Calculation (Using **tanh**):
 
- First, we will calculate the input to the hidden neuron by multiplying the input by the weight and adding the bias:
-   \[
-   z_1 = (w_1 \times x) + b_1 = (2 \times 0.5) + 0.1 = 1.0 + 0.1 = 1.1
-   \]
-   Now, we apply the **tanh** function to this value:
-   \[
-   \text{hidden\_output} = \tanh(1.1) \approx 0.7616
-   \]
-   So, the output of the hidden layer is **0.7616**.
+First, we calculate the input to the hidden neuron by multiplying the input by the weight and adding the bias:
 
-**Output Layer Calculation (Using sigmoid)**:
-   Now, we take the output of the hidden layer (which is **0.7616**) and pass it through the output layer. First, we calculate the input to the output neuron:
-   \[
-   z_2 = (w_2 \times \text{hidden\_output}) + b_2 = (-1.5 \times 0.7616) + 0.2 = -1.1424 + 0.2 = -0.9424
-   \]
-   Finally, we apply the **sigmoid** function to this value:
-   \[
-   \text{output} = \frac{1}{1 + e^{-z_2}} = \frac{1}{1 + e^{0.9424}} \approx \frac{1}{1 + 2.567} \approx 0.279
-   \]
+\[
+z_1 = (w_1 \times x) + b_1 = (2 \times 0.5) + 0.1 = 1.0 + 0.1 = 1.1
+\]
 
-The **final output** (after applying **sigmoid**) is approximately **0.279**. This means that the model predicts a **27.9% chance** that the input belongs to class 1(or class 0)
+Now, we apply the **tanh** function to this value:
 
-###How can tanh be used in the output layer if it's bound to -1 and 1?
+\[
+\text{hidden\_output} = \tanh(1.1) \approx 0.7616
+\]
 
-We typically wouldn't use tanh in the output layer for most real-world problems where the output needs to be either an unrestricted continuous value or a probability. This is because tanh is bounded between -1 and 1, which limits its applicability, especially in cases like regression tasks or classification tasks that require output values beyond that range, such as probabilities between 0 and 1.
+So, the output of the hidden layer is **0.7616**.
 
+---
 
+### Output Layer Calculation (Using **sigmoid**):
+
+Next, we take the output of the hidden layer (which is **0.7616**) and pass it through the output layer. First, we calculate the input to the output neuron:
+
+\[
+z_2 = (w_2 \times \text{hidden\_output}) + b_2 = (-1.5 \times 0.7616) + 0.2 = -1.1424 + 0.2 = -0.9424
+\]
+
+Finally, we apply the **sigmoid** function to this value:
+
+\[
+\text{output} = \frac{1}{1 + e^{-z_2}} = \frac{1}{1 + e^{0.9424}} \approx \frac{1}{1 + 2.567} \approx 0.279
+\]
+
+The **final output** (after applying **sigmoid**) is approximately **0.279**. This means that the model predicts a **27.9% chance** that the input belongs to class 1 (or class 0).
+
+---
+
+### How can **tanh** be used in the output layer if it's bound to -1 and 1?
+
+We typically wouldn't use **tanh** in the output layer for most real-world problems where the output needs to be either an unrestricted continuous value or a probability. This is because **tanh** is bounded between **-1 and 1**, which limits its applicability, especially in cases like regression tasks or classification tasks that require output values beyond that range, such as probabilities between **0 and 1** or any real-valued number.
