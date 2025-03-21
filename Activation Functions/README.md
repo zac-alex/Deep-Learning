@@ -176,8 +176,62 @@ output = 1 / (1 + e^(-z2)) = 1 / (1 + e^(0.9424)) ≈ 1 / (1 + 2.567) ≈ 0.279
 
 The final output (after applying sigmoid) is approximately 0.279. This means that the model predicts a 27.9% chance that the input belongs to class 1 (or class 0).
 
----
 
 ### How can tanh be used in the output layer if it's bound to -1 and 1?
 
 We typically wouldn't use tanh in the output layer for most real-world problems where the output needs to be either an unrestricted continuous value or a probability. This is because tanh is bounded between -1 and 1, which limits its applicability, especially in cases like regression tasks or classification tasks that require output values beyond that range, such as probabilities between 0 and 1.
+
+### ReLU (Rectified Linear Unit)
+
+ReLU is probably the most commonly used activation function in neural networks. It's popular for a good reason—it’s simple, computationally efficient, and works well in most cases. 
+
+The ReLU function is defined as:
+
+ReLU(x) = max(0, x)
+
+In simpler terms, ReLU takes the input `x` and outputs:
+- The value of `x` if `x` is greater than or equal to 0.
+- Zero if `x` is less than 0.
+
+### How Does ReLU Work?
+
+Let’s break it down with an example. Suppose you pass two different inputs to the ReLU function: one positive and one negative.
+
+- For an input `x = -2`, the output of ReLU would be:
+
+ReLU(-2) = max(0, -2) = 0
+
+- For an input `x = 3`, the output of ReLU would be:
+
+ReLU(3) = max(0, 3) = 3
+
+You can see how ReLU "zeros out" negative values. This makes it an effective way to introduce non-linearity into a neural network without losing too much information for positive inputs.
+
+When the input is negative, ReLU outputs zero and the gradient is zero as well. As a result, the neuron doesn’t learn during backpropagation, and the network can fail to train properly. This is often called the **dying ReLU problem or Dying Neurons**.
+
+### Leaky ReLU
+
+To address the issues with ReLU, particularly the dying neuron problem, **Leaky ReLU** was introduced. Leaky ReLU is a variation of ReLU that allows a small, non-zero gradient for negative inputs. This ensures that neurons can still learn, even when the input is negative. The Leaky ReLU function is defined as:
+
+**LeakyReLU(x) = x, if x ≥ 0**  
+**LeakyReLU(x) = 0.01 * x, if x < 0**
+
+In other words:
+- If `x ≥ 0`, then `LeakyReLU(x) = x`
+- If `x < 0`, then `LeakyReLU(x) = 0.01 * x`
+
+
+Let’s use an example again. If we pass the same inputs as before to Leaky ReLU:
+
+- For an input `x = -2`:  
+  `LeakyReLU(-2) = 0.01 * (-2) = -0.02`
+
+- For an input `x = 3`:  
+  `LeakyReLU(3) = 3` (since the input is greater than or equal to 0)
+
+Notice that instead of turning negative inputs into zero, Leaky ReLU gives them a small negative slope, which means the neuron can still "learn" from negative values. This prevents the "dying" neurons that we see with ReLU.
+
+Leaky ReLU avoids the problem of dead neurons by allowing small negative values to pass through the network and ensures that neurons keep updating during training.
+Since negative values still have a small gradient, the network can converge faster, avoiding the issues that ReLU might face in certain situations.
+
+![Example Image 4](Images/Figure_6.png)
