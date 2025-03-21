@@ -127,7 +127,7 @@ Both sigmoid and tanh can suffer from the vanishing gradient problem in deep net
 
 Both sigmoid and tanh can suffer from the vanishing gradient problem in deep networks, where gradients become very small and stop the weights from updating effectively. However, tanh is generally preferred because it has a wider range of gradient values (compared to sigmoid), making it more effective in practice for learning over longer time periods and deeper networks.
 
-###Why tanh isn't directly used for probabilities:
+### Why tanh isn't directly used for probabilities?
 
 Sigmoid is specifically designed for probability-like outputs because it maps any input to a value between 0 and 1. This is why it's typically used in binary classification tasks where the output represents a probability of class membership.
 
