@@ -370,6 +370,54 @@ Now, calculate Swish for `x = -2`:
 
 Swish(-2) = -2 / (1 + exp(-(-2))) Swish(-2) = -2 / (1 + exp(2)) Swish(-2) = -2 / (1 + 7.389) Swish(-2) = -2 / 8.389 Swish(-2) ≈ -0.238
 
+
+# Softmax Function
+
+The **Softmax function** is commonly used in the final layer of a neural network for **multi-class classification** problems. Its primary purpose is to transform raw output scores (**logits**) from a neural network into a **probability distribution** over multiple classes.
+
+### How Softmax Works
+
+Softmax converts a vector of raw scores into probabilities, where each probability indicates the likelihood of a specific class. These probabilities lie in the range `(0, 1)` and the sum of all probabilities equals `1`. This makes it ideal for classification tasks, where the goal is to assign an instance to one of several classes.
+
+Softmax function :
+
+S(z_i) = e^(z_i) / ∑ e^(z_j)
+
+Where:
+- `z_i` is the raw output score (logit) for class `i`.
+- `e^(z_i)` is the exponentiation of the raw score for class `i`.
+- `∑ e^(z_j)` is the sum of the exponentiated values for all classes `j` in the output layer.
+- `S(z_i)` represents the normalized probability for class `i`.
+
+![Example Image 10](Images/Figure_10.png)
+
+### Example Calculation (Image Classification)
+
+Imagine a neural network outputs the following logits for a 3-class image classification problem (e.g., identifying 'cat', 'dog', or 'rabbit'):
+
+Logits = [2.0, 1.0, 0.5]
+
+First we will exponentiate each of the raw scores using the constant `e`:
+
+Exp(Logits) = [e^2.0, e^1.0, e^0.5] ≈ [7.389, 2.718, 1.649]
+
+Now, sum all the exponentiated values:
+
+Sum = 7.389 + 2.718 + 1.649 ≈ 11.756
+
+Now, for each class, divide the exponentiated value by the sum to get the probability:
+
+P(cat) = e^2.0 / Sum ≈ 7.389 / 11.756 ≈ 0.629 P(dog) = e^1.0 / Sum ≈ 2.718 / 11.756 ≈ 0.231 P(rabbit) = e^0.5 / Sum ≈ 1.649 / 11.756 ≈ 0.140
+
+The resulting probabilities are as follows:
+
+Probabilities = [0.629, 0.231, 0.140]
+
+What it means is that the network predicts that the image is most likely a **cat** with a probability of **0.629** and the second-highest probability is for a **dog** with a probability of **0.231**.
+
+The softmax function ensures that all the output probabilities lie between `0` and `1` and the sum of all output probabilities is always equal to `1`, ensuring they form a valid probability distribution.
+
+
 So, when input `x = -2`  output is approximately `-0.238`.
 
 Since Swish involves a sigmoid function, it is computationally more expensive than ReLU, which is a simple thresholding function.
