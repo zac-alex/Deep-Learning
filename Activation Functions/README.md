@@ -370,6 +370,10 @@ Now, calculate Swish for `x = -2`:
 
 Swish(-2) = -2 / (1 + exp(-(-2))) Swish(-2) = -2 / (1 + exp(2)) Swish(-2) = -2 / (1 + 7.389) Swish(-2) = -2 / 8.389 Swish(-2) ≈ -0.238
 
+So, when input `x = -2`  output is approximately `-0.238`.
+
+Since Swish involves a sigmoid function, it is computationally more expensive than ReLU, which is a simple thresholding function.
+
 
 # Softmax Function
 
@@ -417,8 +421,58 @@ What it means is that the network predicts that the image is most likely a **cat
 
 The softmax function ensures that all the output probabilities lie between `0` and `1` and the sum of all output probabilities is always equal to `1`, ensuring they form a valid probability distribution.
 
+# Let's Sum Things Up!
 
-So, when input `x = -2`  output is approximately `-0.238`.
+## 1. ReLU Activation Function in Hidden Layers
+- **ReLU (Rectified Linear Unit)** is widely used in the **hidden layers** of deep neural networks, particularly in architectures like **Convolutional Neural Networks (CNNs)** and **Fully Connected Networks (FCNs)**. 
+- ReLU helps avoid the **vanishing gradient problem**, where gradients become very small during training, making learning slow and inefficient.
+- It allows for faster training and helps with convergence due to its simplicity and non-linearity.
 
-Since Swish involves a sigmoid function, it is computationally more expensive than ReLU, which is a simple thresholding function.
+## 2. Sigmoid and Tanh in Hidden Layers
+- **Sigmoid** and **Tanh** activation functions are typically avoided in **deep hidden layers** due to their susceptibility to the **vanishing gradient problem**.
+- **Sigmoid** squashes its input to a small range between 0 and 1, which makes it prone to vanishing gradients as the network depth increases.
+- **Tanh** has a wider range (-1 to 1) compared to Sigmoid but still suffers from vanishing gradients in deep networks.
+
+## 3. Swish Activation Function in Deep Networks
+- The **Swish function** has been proposed as an alternative to ReLU, particularly for very deep networks (networks with more than 40 layers).
+- Swish is smoother and does not saturate like Sigmoid, which helps improve training stability in deeper models.
+
+
+## 4. Activation Functions for Output Layer
+
+### Regression
+- For **regression** problems, where the goal is to predict a continuous value, a **linear activation function** is used in the output layer.
+- A linear activation does not constrain the output range, allowing it to predict any real-valued number.
+
+### Binary Classification
+- For **binary classification** (e.g., predicting one of two classes), the **Sigmoid** activation function is commonly used in the output layer.
+- Sigmoid outputs a value between 0 and 1, representing the probability of the input belonging to one of the classes.
+
+### Multiclass Classification
+- For **multiclass classification** (e.g., classifying an input into one of several classes), **Softmax** is used in the output layer.
+- Softmax converts the raw logits into a probability distribution, ensuring that the sum of all output probabilities equals 1.
+
+### Multilabel Classification
+- For **multilabel classification** (where each input can belong to multiple classes), **Sigmoid** is used for each class in the output layer.
+- Each Sigmoid unit independently predicts the probability that a particular class label is present.
+
+## 5. Activation Functions for Specific Neural Network Architectures
+
+### Convolutional Neural Network (CNN)
+- **ReLU** is commonly used in the hidden layers of CNNs. It allows the network to learn complex spatial patterns and speeds up training by avoiding issues related to gradient saturation, unlike Sigmoid or Tanh.
+
+### Recurrent Neural Network (RNN)
+- In **RNNs**, **Tanh** and **Sigmoid** are often used for the hidden layer activations. These activation functions help the network handle temporal data and learn long-term dependencies.
+- **LSTMs (Long Short-Term Memory)** and **GRUs (Gated Recurrent Units)**, which are specialized RNNs, also rely on **Tanh** and **Sigmoid** to mitigate the vanishing gradient problem in sequence learning tasks.
+
+- **ReLU** is generally used in the **hidden layers** of most deep networks like CNNs and FCNs.
+- **Sigmoid** and **Tanh** are avoided in deep hidden layers due to the **vanishing gradient problem**.
+- **Swish** can be used in very **deep networks** to improve training stability.
+- The **output layer activation function** depends on the problem:
+- **Linear** for regression.
+- **Sigmoid** for binary classification and multilabel classification.
+- **Softmax** for multiclass classification.
+- The choice of activation function in **hidden layers** is architecture-dependent, with **ReLU** preferred for CNNs and **Tanh/Sigmoid** used in RNNs.
+
+By choosing the right activation functions for the layers and network architecture, we can greatly improve the performance and efficiency of your neural network models
 
